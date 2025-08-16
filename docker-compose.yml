@@ -1,0 +1,122 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: invoice_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: invoice_app
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./backend/scripts/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - invoice_network
+
+  # Redis Cache
+  redis:
+    image: redis:6.2-alpine
+    container_name: invoice_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - invoice_network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: invoice_backend
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/invoice_app?authSource=admin
+      - REDIS_URL=redis://redis:6379
+      - FLASK_ENV=development
+      - FLASK_DEBUG=true
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/venv
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - invoice_network
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: invoice_frontend
+    restart: unless-stopped
+    environment:
+      - NUXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - invoice_network
+
+  # Celery Worker
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: invoice_celery
+    restart: unless-stopped
+    command: celery -A app.celery worker --loglevel=info
+    environment:
+      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/invoice_app?authSource=admin
+      - REDIS_URL=redis://redis:6379
+      - FLASK_ENV=development
+    volumes:
+      - ./backend:/app
+      - /app/venv
+    depends_on:
+      - mongodb
+      - redis
+      - backend
+    networks:
+      - invoice_network
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: invoice_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - invoice_network
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  invoice_network:
+    driver: bridge
