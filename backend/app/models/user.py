@@ -31,6 +31,10 @@ class User(Document):
     stripe_enabled = BooleanField(default=False)
     paypal_enabled = BooleanField(default=False)
     
+    # Localization settings
+    preferred_language = StringField(default='en', max_length=5)
+    timezone = StringField(default='UTC', max_length=50)
+    
     meta = {
         'collection': 'users',
         'indexes': [
@@ -68,7 +72,9 @@ class User(Document):
             'invoice_prefix': self.invoice_prefix,
             'next_invoice_number': self.next_invoice_number,
             'stripe_enabled': self.stripe_enabled,
-            'paypal_enabled': self.paypal_enabled
+            'paypal_enabled': self.paypal_enabled,
+            'preferred_language': self.preferred_language,
+            'timezone': self.timezone
         }
     
     def save(self, *args, **kwargs):
