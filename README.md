@@ -1,167 +1,144 @@
-# Créateur de Factures Automatisées
+# Invoice Automation Application
 
-[![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)](https://vuejs.org/)
-[![Nuxt.js](https://img.shields.io/badge/Nuxt.js-00DC82?style=for-the-badge&logo=nuxt.js&logoColor=white)](https://nuxt.com/)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
-[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://mongodb.com/)
-[![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
-[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.com/)
+A full-stack web application for automated invoice management with integrated payment processing via Stripe and PayPal.
 
-## 📋 Description
+## 🚀 Features
 
-Application web complète pour la création, gestion et automatisation de factures avec intégration des systèmes de paiement Stripe et PayPal. Cette solution permet aux entreprises de gérer efficacement leur facturation avec des fonctionnalités avancées de suivi, de paiement et de reporting.
-
-## ✨ Fonctionnalités
-
-### 🧾 Gestion des Factures
-- Création automatique de factures personnalisables
-- Modèles de factures réutilisables
-- Numérotation automatique et séquentielle
-- Support multi-devises
-- Calcul automatique des taxes (TVA, etc.)
-- Gestion des remises et promotions
-
-### 💳 Intégrations de Paiement
-- **Stripe** : Paiements par carte, virements SEPA, wallets digitaux
-- **PayPal** : Paiements PayPal, cartes de crédit via PayPal
-- Webhooks pour synchronisation automatique des paiements
-- Support des paiements récurrents/abonnements
-- Gestion des remboursements
-
-### 👥 Gestion Clients
-- Carnet d'adresses clients complet
-- Historique des transactions
-- Profils de facturation personnalisés
-- Notifications automatiques par email
-
-### 📊 Reporting & Analytics
-- Tableau de bord avec métriques en temps réel
-- Rapports de ventes et revenus
-- Statistiques de paiement
-- Export des données (PDF, Excel, CSV)
-
-### 🔐 Sécurité & Administration
-- Authentification JWT
-- Chiffrement des données sensibles
-- Logs d'audit complets
-- Gestion des rôles et permissions
+- **User Authentication**: Secure JWT-based authentication system
+- **Invoice Management**: Create, edit, and manage professional invoices
+- **Client Management**: Organize customer information and billing details
+- **Payment Processing**: Integrated Stripe and PayPal payment gateways
+- **PDF Generation**: Automatic invoice PDF generation
+- **Email Notifications**: Send invoices directly to clients
+- **Analytics Dashboard**: Business insights and reporting
+- **Multi-currency Support**: Handle different currencies and tax rates
+- **Responsive Design**: Modern UI that works on all devices
 
 ## 🏗️ Architecture
 
-### Frontend (Nuxt.js + Vue.js)
-```
-frontend/
-├── components/          # Composants Vue réutilisables
-│   ├── Invoice/        # Composants spécifiques aux factures
-│   ├── Payment/        # Composants de paiement
-│   ├── Dashboard/      # Composants du tableau de bord
-│   └── Common/         # Composants communs (UI)
-├── pages/              # Pages et routing
-├── layouts/            # Layouts de l'application
-├── plugins/            # Plugins Nuxt
-├── middleware/         # Middleware d'authentification
-├── store/              # Pinia/Vuex store
-├── utils/              # Utilitaires et helpers
-└── assets/             # Assets statiques
-```
-
 ### Backend (Flask + Python)
-```
-backend/
-├── app/
-│   ├── models/         # Modèles MongoDB (MongoEngine)
-│   ├── routes/         # Routes API REST
-│   │   ├── auth.py     # Authentification
-│   │   ├── invoices.py # Gestion des factures
-│   │   ├── payments.py # Intégrations paiements
-│   │   ├── clients.py  # Gestion clients
-│   │   └── reports.py  # Rapports et analytics
-│   ├── services/       # Logique métier
-│   │   ├── stripe_service.py
-│   │   ├── paypal_service.py
-│   │   ├── invoice_service.py
-│   │   └── email_service.py
-│   ├── utils/          # Utilitaires
-│   └── config/         # Configuration
-├── migrations/         # Scripts de migration DB
-└── tests/             # Tests unitaires et d'intégration
-```
+- **Framework**: Flask 2.3.3 with RESTful API
+- **Database**: MongoDB with MongoEngine ODM
+- **Authentication**: JWT tokens with refresh mechanism
+- **Payment**: Stripe and PayPal integration
+- **Background Tasks**: Celery with Redis
+- **PDF Generation**: ReportLab for invoice PDFs
+- **Email**: SMTP/SendGrid integration
 
-## 🛠️ Stack Technique
+### Frontend (Nuxt.js + Vue.js)
+- **Framework**: Nuxt.js 3 with Vue.js 3
+- **Styling**: Tailwind CSS with custom design system
+- **State Management**: Pinia store
+- **UI Components**: Headless UI + Heroicons
+- **Charts**: Chart.js for analytics
+- **Forms**: VeeValidate with Yup validation
 
-### Frontend
-- **Framework** : Nuxt.js 3.x (Vue.js 3.x)
-- **UI Framework** : Tailwind CSS + Headless UI
-- **State Management** : Pinia
-- **HTTP Client** : Axios/Fetch API
-- **Validation** : VeeValidate + Yup
-- **Charts** : Chart.js / ApexCharts
-- **PDF Generation** : jsPDF
-- **Date Handling** : Day.js
+## 📋 Prerequisites
 
-### Backend
-- **Framework** : Flask 2.x
-- **ORM** : MongoEngine
-- **Authentication** : Flask-JWT-Extended
-- **API Documentation** : Flask-RESTX (Swagger)
-- **Task Queue** : Celery + Redis
-- **Email** : Flask-Mail
-- **PDF Generation** : ReportLab
-- **Validation** : Marshmallow
+- **Node.js** 18+ and npm/yarn
+- **Python** 3.9+
+- **MongoDB** 6.0+
+- **Redis** 6.0+
+- **Docker** and Docker Compose (optional)
 
-### Base de Données
-- **Database** : MongoDB 6.x
-- **Cache** : Redis
-- **Search** : MongoDB Atlas Search (optionnel)
+## 🛠️ Installation
 
-### Intégrations & Services
-- **Paiements** : Stripe API v2023, PayPal REST API
-- **Email** : SendGrid / SMTP
-- **Storage** : AWS S3 / Local Storage
-- **Monitoring** : Sentry (optionnel)
+### Option 1: Docker (Recommended)
 
-## 🚀 Installation
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd create-bill-automatique
+   ```
 
-### Prérequis
-- Node.js 18+ et npm/yarn
-- Python 3.9+
-- MongoDB 6.0+
-- Redis 6.0+
-- Comptes Stripe et PayPal (clés API)
+2. **Start all services**
+   ```bash
+   docker-compose up -d
+   ```
 
-### 1. Cloner le Repository
-```bash
-git clone https://github.com/votre-username/invoice-generator.git
-cd invoice-generator
-```
+3. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
+   - MongoDB: localhost:27017
+   - Redis: localhost:6379
 
-### 2. Configuration Backend
+### Option 2: Manual Setup
 
-```bash
-cd backend
+#### Backend Setup
 
-# Créer un environnement virtuel
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
+1. **Navigate to backend directory**
+   ```bash
+   cd backend
+   ```
 
-# Installer les dépendances
-pip install -r requirements.txt
+2. **Create virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-# Configuration des variables d'environnement
-cp .env.example .env
-```
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Éditer le fichier `.env` :
+4. **Configure environment variables**
+   ```bash
+   cp env.example .env
+   # Edit .env with your configuration
+   ```
+
+5. **Start MongoDB and Redis**
+   ```bash
+   # Start MongoDB (install MongoDB first)
+   mongod
+   
+   # Start Redis (install Redis first)
+   redis-server
+   ```
+
+6. **Run the backend**
+   ```bash
+   python app.py
+   ```
+
+#### Frontend Setup
+
+1. **Navigate to frontend directory**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   ```bash
+   # Create .env file with your API configuration
+   echo "NUXT_PUBLIC_API_BASE_URL=http://localhost:5000/api" > .env
+   ```
+
+4. **Run the frontend**
+   ```bash
+   npm run dev
+   ```
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+#### Backend (.env)
 ```env
 # Database
 MONGODB_URI=mongodb://localhost:27017/invoice_app
 REDIS_URL=redis://localhost:6379
 
-# JWT Secret
-JWT_SECRET_KEY=votre-cle-secrete-jwt
+# JWT
+JWT_SECRET_KEY=your-secret-jwt-key
+JWT_ACCESS_TOKEN_EXPIRES=3600
+JWT_REFRESH_TOKEN_EXPIRES=2592000
 
 # Stripe
 STRIPE_PUBLIC_KEY=pk_test_...
@@ -169,195 +146,170 @@ STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 
 # PayPal
-PAYPAL_CLIENT_ID=votre-client-id
-PAYPAL_CLIENT_SECRET=votre-client-secret
-PAYPAL_ENVIRONMENT=sandbox  # ou production
+PAYPAL_CLIENT_ID=your_client_id
+PAYPAL_CLIENT_SECRET=your_client_secret
+PAYPAL_ENVIRONMENT=sandbox
 
 # Email
 MAIL_SERVER=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USERNAME=votre-email
-MAIL_PASSWORD=votre-mot-de-passe
-
-# AWS S3 (optionnel)
-AWS_ACCESS_KEY_ID=votre-access-key
-AWS_SECRET_ACCESS_KEY=votre-secret-key
-AWS_S3_BUCKET=votre-bucket
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_app_password
 ```
 
-### 3. Configuration Frontend
-
-```bash
-cd frontend
-
-# Installer les dépendances
-npm install
-# ou
-yarn install
-
-# Configuration Nuxt
-cp .env.example .env
-```
-
-Éditer le fichier `.env` :
+#### Frontend (.env)
 ```env
-# API Base URL
 NUXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
-
-# Stripe
 NUXT_PUBLIC_STRIPE_PUBLIC_KEY=pk_test_...
-
-# PayPal
-NUXT_PUBLIC_PAYPAL_CLIENT_ID=votre-client-id
+NUXT_PUBLIC_PAYPAL_CLIENT_ID=your_client_id
 ```
 
-### 4. Initialisation de la Base de Données
+## 🚀 Usage
 
-```bash
-cd backend
+### 1. First Time Setup
 
-# Lancer MongoDB (si local)
-mongod
+1. **Register a new account** at http://localhost:3000/register
+2. **Complete your company profile** with business information
+3. **Configure payment gateways** in Settings > Payments
 
-# Exécuter les migrations
-python manage.py init_db
-```
+### 2. Managing Clients
 
-### 5. Lancement de l'Application
+1. Navigate to **Clients** section
+2. **Add new clients** with complete billing information
+3. **Organize clients** with tags and notes
 
-#### Backend (Terminal 1)
-```bash
-cd backend
-source venv/bin/activate
-python app.py
-# API disponible sur http://localhost:5000
-```
+### 3. Creating Invoices
 
-#### Worker Celery (Terminal 2)
-```bash
-cd backend
-source venv/bin/activate
-celery -A app.celery worker --loglevel=info
-```
+1. Go to **Invoices** > **New Invoice**
+2. **Select a client** from your client list
+3. **Add invoice items** with descriptions, quantities, and prices
+4. **Set tax rates** and additional fees
+5. **Preview and send** the invoice
 
-#### Frontend (Terminal 3)
-```bash
-cd frontend
-npm run dev
-# Application disponible sur http://localhost:3000
-```
+### 4. Payment Processing
 
-## 📝 Utilisation
+1. **Configure Stripe/PayPal** in your account settings
+2. **Send invoices** to clients via email
+3. **Monitor payments** in real-time through webhooks
+4. **Track payment status** in the dashboard
 
-### 1. Création d'un Compte
-- Accéder à `http://localhost:3000/register`
-- Créer un compte administrateur
-- Configurer les paramètres de l'entreprise
+### 5. Reports and Analytics
 
-### 2. Configuration des Paiements
-- Aller dans `Paramètres > Paiements`
-- Configurer Stripe et/ou PayPal
-- Tester les intégrations avec les clés de test
+1. **View dashboard** for business overview
+2. **Generate reports** for revenue, clients, and invoices
+3. **Export data** in various formats
+4. **Track performance** over time
 
-### 3. Création de Factures
-- `Factures > Nouvelle Facture`
-- Sélectionner/ajouter un client
-- Ajouter les lignes de facture
-- Prévisualiser et envoyer
+## 🔧 API Endpoints
 
-### 4. Suivi des Paiements
-- Les webhooks mettent à jour automatiquement le statut
-- Tableau de bord pour vue d'ensemble
-- Notifications en temps réel
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/auth/refresh` - Refresh access token
+- `GET /api/auth/profile` - Get user profile
+- `PUT /api/auth/profile` - Update user profile
 
-## 🔧 API Documentation
+### Invoices
+- `GET /api/invoices` - List invoices
+- `POST /api/invoices` - Create invoice
+- `GET /api/invoices/{id}` - Get invoice details
+- `PUT /api/invoices/{id}` - Update invoice
+- `DELETE /api/invoices/{id}` - Delete invoice
+- `POST /api/invoices/{id}/send` - Send invoice
 
-L'API REST est documentée avec Swagger UI, accessible à `http://localhost:5000/docs`
+### Clients
+- `GET /api/clients` - List clients
+- `POST /api/clients` - Create client
+- `GET /api/clients/{id}` - Get client details
+- `PUT /api/clients/{id}` - Update client
+- `DELETE /api/clients/{id}` - Delete client
 
-### Endpoints Principaux
+### Payments
+- `POST /api/payments/stripe/create-intent` - Create Stripe payment
+- `POST /api/payments/paypal/create-order` - Create PayPal order
+- `POST /api/payments/stripe/webhook` - Stripe webhook
+- `POST /api/payments/paypal/webhook` - PayPal webhook
 
-#### Authentification
-```
-POST /api/auth/register    # Inscription
-POST /api/auth/login       # Connexion
-POST /api/auth/refresh     # Refresh token
-```
+### Reports
+- `GET /api/reports/dashboard` - Dashboard data
+- `GET /api/reports/revenue` - Revenue reports
+- `GET /api/reports/clients` - Client performance
+- `POST /api/reports/export` - Export data
 
-#### Factures
-```
-GET    /api/invoices       # Liste des factures
-POST   /api/invoices       # Créer une facture
-GET    /api/invoices/{id}  # Détails d'une facture
-PUT    /api/invoices/{id}  # Modifier une facture
-DELETE /api/invoices/{id}  # Supprimer une facture
-POST   /api/invoices/{id}/send  # Envoyer par email
-```
+## 🧪 Testing
 
-#### Paiements
-```
-POST /api/payments/stripe/create-intent    # Créer un PaymentIntent Stripe
-POST /api/payments/paypal/create-order     # Créer une commande PayPal
-POST /api/payments/stripe/webhook          # Webhook Stripe
-POST /api/payments/paypal/webhook          # Webhook PayPal
-```
-
-## 🧪 Tests
-
-### Backend
+### Backend Tests
 ```bash
 cd backend
 python -m pytest tests/
 ```
 
-### Frontend
+### Frontend Tests
 ```bash
 cd frontend
 npm run test
 ```
 
-### Tests E2E
+### E2E Tests
 ```bash
 cd frontend
 npm run test:e2e
 ```
 
-## 📦 Déploiement
+## 📦 Deployment
 
-### Docker
-```yaml
-# docker-compose.yml fourni pour déploiement rapide
-docker-compose up -d
+### Production Deployment
+
+1. **Update environment variables** for production
+2. **Use production database** (MongoDB Atlas, etc.)
+3. **Configure SSL certificates** for HTTPS
+4. **Set up monitoring** and logging
+5. **Use production payment keys** for Stripe/PayPal
+
+### Docker Production
+```bash
+# Build production images
+docker-compose -f docker-compose.prod.yml build
+
+# Start production services
+docker-compose -f docker-compose.prod.yml up -d
 ```
 
-### Production
-1. Configurer les variables d'environnement de production
-2. Utiliser un serveur WSGI (Gunicorn) pour Flask
-3. Utiliser PM2 ou similaire pour Nuxt.js
-4. Configurer un reverse proxy (Nginx)
-5. Mettre en place le monitoring et les logs
+## 🔒 Security Features
 
-## 🤝 Contribution
+- **JWT Authentication** with refresh tokens
+- **Password hashing** with Werkzeug
+- **CORS protection** for API endpoints
+- **Input validation** and sanitization
+- **Rate limiting** (can be added)
+- **HTTPS enforcement** in production
 
-1. Fork du projet
-2. Créer une branche feature (`git checkout -b feature/amazing-feature`)
-3. Commit des changements (`git commit -m 'Add amazing feature'`)
-4. Push vers la branche (`git push origin feature/amazing-feature`)
-5. Ouvrir une Pull Request
+## 🤝 Contributing
 
-## 📄 Licence
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+## 📄 License
 
-## 📞 Support
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-- **Documentation** : [Wiki du projet](https://github.com/votre-username/invoice-generator/wiki)
-- **Issues** : [GitHub Issues](https://github.com/votre-username/invoice-generator/issues)
-- **Email** : support@votre-domaine.com
+## 🆘 Support
 
-## 🙏 Remerciements
+- **Documentation**: Check the code comments and API documentation
+- **Issues**: Report bugs and feature requests via GitHub Issues
+- **Discussions**: Use GitHub Discussions for questions and help
 
-- Vue.js et Nuxt.js pour le framework frontend
-- Flask pour l'API backend robuste
-- Stripe et PayPal pour les intégrations de paiement
-- MongoDB pour la base de données flexible
-- La communauté open source
+## 🙏 Acknowledgments
+
+- **Vue.js** and **Nuxt.js** for the amazing frontend framework
+- **Flask** for the robust Python web framework
+- **MongoDB** for the flexible NoSQL database
+- **Stripe** and **PayPal** for payment processing
+- **Tailwind CSS** for the utility-first CSS framework
+
+---
+
+**Happy invoicing! 🎉**
