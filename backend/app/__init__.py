@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from flask_socketio import SocketIO
 from mongoengine import connect
 from celery import Celery
 import os
@@ -14,6 +15,7 @@ load_dotenv()
 jwt = JWTManager()
 mail = Mail()
 celery = Celery(__name__)
+socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app():
     app = Flask(__name__)
@@ -47,6 +49,11 @@ def create_app():
     # Initialize extensions
     jwt.init_app(app)
     mail.init_app(app)
+    socketio.init_app(app)
+    
+    # Initialize i18n service
+    from .services.i18n_service import i18n_service
+    i18n_service.init_app(app)
     
     # Enable CORS
     CORS(app, resources={r"/api/*": {"origins": "*"}})
