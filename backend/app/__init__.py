@@ -73,11 +73,15 @@ def create_app():
     from .routes.payments import payments_bp
     from .routes.clients import clients_bp
     from .routes.reports import reports_bp
+    from .routes.notifications import notifications_bp
+    from .routes.languages import languages_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(invoices_bp, url_prefix='/api/invoices')
     app.register_blueprint(payments_bp, url_prefix='/api/payments')
     app.register_blueprint(clients_bp, url_prefix='/api/clients')
     app.register_blueprint(reports_bp, url_prefix='/api/reports')
+    app.register_blueprint(notifications_bp, url_prefix='/api/notifications')
+    app.register_blueprint(languages_bp, url_prefix='/api/languages')
     
     return app
