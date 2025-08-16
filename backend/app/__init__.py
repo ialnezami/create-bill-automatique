@@ -67,6 +67,11 @@ def create_app():
         result_backend=os.getenv('REDIS_URL', 'redis://localhost:6379')
     )
     
+    # Initialize notification service and register socket events
+    from .services.notification_service import NotificationService, register_socket_events
+    notification_service = NotificationService(socketio)
+    register_socket_events(socketio, notification_service)
+    
     # Register blueprints
     from .routes.auth import auth_bp
     from .routes.invoices import invoices_bp
@@ -83,5 +88,8 @@ def create_app():
     app.register_blueprint(reports_bp, url_prefix='/api/reports')
     app.register_blueprint(notifications_bp, url_prefix='/api/notifications')
     app.register_blueprint(languages_bp, url_prefix='/api/languages')
+    
+    # Make socketio available globally
+    app.socketio = socketio
     
     return app
